@@ -13,8 +13,13 @@ load_dotenv()
 
 news_api_key = os.environ.get("NEWS_API_KEY")
 
-
+# Initialize OpenAI client with v2 Assistants API header
 client = openai.OpenAI()
+# Ensure the header is set for v2 API
+if not hasattr(client, '_default_headers'):
+    client._default_headers = {}
+client._default_headers["OpenAI-Beta"] = "assistants=v2"
+
 model = "gpt-3.5-turbo"
 
 
@@ -91,7 +96,8 @@ class AssistantManager:
                 name=name,
                 instructions=instructions,
                 tools=tools,
-                model=self.model
+                model=self.model,
+                extra_headers={"OpenAI-Beta": "assistants=v2"}
             )
             AssistantManager.assistant_id = assistant_obj.id
             self.assistant = assistant_obj
@@ -99,7 +105,9 @@ class AssistantManager:
 
     def create_thread(self):
         if not self.thread:
-            thread_obj = self.client.beta.threads.create()
+            thread_obj = self.client.beta.threads.create(
+                extra_headers={"OpenAI-Beta": "assistants=v2"}
+            )
             AssistantManager.thread_id = thread_obj.id
             self.thread = thread_obj
             print(f"ThreadID::: {self.thread.id}")
@@ -109,21 +117,25 @@ class AssistantManager:
             self.client.beta.threads.messages.create(
                 thread_id=self.thread.id,
                 role=role,
-                content=content
+                content=content,
+                extra_headers={"OpenAI-Beta": "assistants=v2"}
             )
 
     def run_assitant(self, instructions):
         if self.thread and self.assistant:
             self.run = self.client.beta.threads.runs.create(
-                thread_id=self.thread_id,
-                assistant_id=self.assistant_id,
-                instructions=instructions
+                thread_id=self.thread.id,
+                assistant_id=self.assistant.id,
+                instructions=instructions,
+                extra_headers={"OpenAI-Beta": "assistants=v2"}
             )
 
     def process_message(self):
         if self.thread:
             messages = self.client.beta.threads.messages.list(
-                thread_id=self.thread.id)
+                thread_id=self.thread.id,
+                extra_headers={"OpenAI-Beta": "assistants=v2"}
+            )
             summary = []
 
             last_message = messages.data[0]
@@ -144,7 +156,8 @@ class AssistantManager:
             while True:
                 time.sleep(5)
                 run_status = self.client.beta.threads.runs.retrieve(
-                    thread_id=self.thread.id, run_id=self.run.id
+                    thread_id=self.thread.id, run_id=self.run.id,
+                    extra_headers={"OpenAI-Beta": "assistants=v2"}
                 )
                 print(f"RUN STATUS:: {run_status.model_dump_json(indent=4)}")
                 if run_status.status == "completed":
@@ -179,7 +192,8 @@ class AssistantManager:
 
         print("Submitting outputs back to the Assistant...")
         self.client.beta.threads.runs.submit_tool_outputs(
-            thread_id=self.thread.id, run_id=self.run.id, tool_outputs=tool_outputs
+            thread_id=self.thread.id, run_id=self.run.id, tool_outputs=tool_outputs,
+            extra_headers={"OpenAI-Beta": "assistants=v2"}
         )
 
     # for streamlit
@@ -190,7 +204,8 @@ class AssistantManager:
     def run_steps(self):
         run_steps = self.client.beta.threads.runs.steps.list(
             thread_id=self.thread.id,
-            run_id=self.run.id
+            run_id=self.run.id,
+            extra_headers={"OpenAI-Beta": "assistants=v2"}
         )
         print(f"Run-Steps::: {run_steps}")
         return run_steps.data
