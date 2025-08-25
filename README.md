@@ -78,6 +78,20 @@ python test.py
 - `requests`: HTTP requests for News API
 - `streamlit`: Web interface framework
 
+## Example
+
+Here is an example of how the News Summarizer works:
+
+1. **Input**: Enter the topic "Artificial Intelligence" in the Streamlit app.
+2. **Processing**: The app fetches the latest news articles on "Artificial Intelligence" using the News API and summarizes them using OpenAI's GPT model.
+3. **Output**: A concise summary of the top articles is displayed in the app.
+
+<p align="center">
+	<img src="assets/example-output.svg" alt="Example Output (AI Summary)" width="720"/>
+</p>
+
+The image above shows a sample output for the topic "Artificial Intelligence."
+
 ## Note
 
 Make sure to keep your API keys secure and never commit them to version control. The `.env` file is already included in `.gitignore` for this purpose.
