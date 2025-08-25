@@ -95,3 +95,36 @@ The image above shows a sample output for the topic "Artificial Intelligence."
 ## Note
 
 Make sure to keep your API keys secure and never commit them to version control. The `.env` file is already included in `.gitignore` for this purpose.
+
+---
+
+## Language Versions
+
+This README is available in the following languages:
+- [English](README.md) - This version
+- [Español](README-es.md) - Spanish version
+
+### Translation Maintenance
+
+We use an automated GitHub workflow to ensure our Spanish documentation stays up-to-date:
+
+- **Automatic Detection**: When README.md is updated, our workflow automatically detects changes
+- **Issue Creation**: If the Spanish version needs updating, an issue is automatically created
+- **Contributor Guidelines**: Detailed translation guidelines are available for contributors
+
+#### For Contributors
+
+To help maintain translations:
+1. Check for open issues labeled `spanish-translation`
+2. Follow our [Translation Guidelines](.github/TRANSLATION_GUIDELINES.md)
+3. Submit pull requests with updated translations
+4. Ensure consistency between language versions
+
+#### Translation Workflow Features
+
+- 🔍 **Change Detection**: Automatically monitors README.md for modifications
+- 📝 **Issue Automation**: Creates translation tasks when updates are needed
+- 📋 **Guidelines**: Comprehensive translation guidelines in both languages
+- 🤝 **Community Driven**: Supports community contributions for translations
+
+For more information about contributing to translations, see our [Translation Guidelines](.github/TRANSLATION_GUIDELINES.md).
