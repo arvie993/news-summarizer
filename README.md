@@ -1,8 +1,6 @@
 # News Summarizer
 
-<p align="center">
-	<img src="assets/news-source.svg" alt="News Source" width="140"/>
-</p>
+<!-- Image reference removed due to missing asset -->
 
 A Python-based news summarization application that uses OpenAI's GPT models and the News API to fetch and summarize news articles on any given topic.
 
