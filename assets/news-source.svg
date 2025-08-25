@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <rect x="6" y="10" width="108" height="84" rx="6" fill="#ffffff" stroke="#2b2f77" stroke-width="4"/>
+  <rect x="14" y="22" width="92" height="18" rx="3" fill="#2b2f77"/>
+  <rect x="14" y="46" width="64" height="8" rx="2" fill="#e6e9ff"/>
+  <rect x="14" y="58" width="92" height="8" rx="2" fill="#f4f6ff"/>
+  <rect x="14" y="70" width="48" height="8" rx="2" fill="#e6e9ff"/>
+  <circle cx="94" cy="36" r="10" fill="#ffb74d" stroke="#b26b00" stroke-width="1"/>
+  <text x="28" y="36" font-family="Verdana, Arial, sans-serif" font-size="12" fill="#ffffff">NEWS</text>
+</svg>
